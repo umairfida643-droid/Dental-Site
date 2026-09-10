@@ -74,6 +74,7 @@ export default function BeforeAfterSlider({ onOpenBooking }) {
             <div 
               ref={containerRef}
               onMouseDown={handleMouseDown}
+              onTouchStart={(e) => { if (e.touches[0]) handleMove(e.touches[0].clientX); }}
               onTouchMove={handleTouchMove}
               className="relative aspect-[16/10] sm:aspect-[16/9] w-full max-w-4xl mx-auto rounded-3xl overflow-hidden shadow-2xl border-2 border-cyan-500/30 cursor-ew-resize select-none bg-slate-950"
             >
@@ -84,18 +85,16 @@ export default function BeforeAfterSlider({ onOpenBooking }) {
                 className="absolute inset-0 w-full h-full object-cover pointer-events-none"
               />
 
-              {/* Before Image (Clipped overlay) */}
-              <div 
-                className="absolute inset-0 overflow-hidden pointer-events-none"
-                style={{ width: `${sliderPosition}%` }}
-              >
-                <img 
-                  src="/assets/img/before.jpg" 
-                  alt="Before Dental Treatment" 
-                  className="absolute inset-0 w-full h-full object-cover max-w-none"
-                  style={{ width: containerRef.current ? `${containerRef.current.clientWidth}px` : '100%' }}
-                />
-              </div>
+              {/* Before Image (Top overlay clipped seamlessly via clip-path for 100% instant alignment) */}
+              <img 
+                src="/assets/img/before.jpg" 
+                alt="Before Dental Treatment" 
+                className="absolute inset-0 w-full h-full object-cover pointer-events-none"
+                style={{
+                  clipPath: `polygon(0 0, ${sliderPosition}% 0, ${sliderPosition}% 100%, 0 100%)`,
+                  WebkitClipPath: `polygon(0 0, ${sliderPosition}% 0, ${sliderPosition}% 100%, 0 100%)`
+                }}
+              />
 
               {/* Badges on Images */}
               <div className="absolute top-4 left-4 pointer-events-none">
