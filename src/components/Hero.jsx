@@ -231,16 +231,18 @@ export default function Hero({ onOpenBooking }) {
                 </div>
               </div>
 
-              {/* Featured Treatment Image with Smooth Zoom */}
+              {/* Featured Treatment Image with Light Reflection Sheen */}
               <div className="relative aspect-[16/11] rounded-2xl overflow-hidden mb-5 bg-slate-900 border border-white/10 shadow-lg group">
                 <img
                   src={clinicHighlights[selectedFeature].image}
                   alt={clinicHighlights[selectedFeature].title}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  className="w-full h-full object-cover brightness-95 group-hover:brightness-105 transition-all duration-300 transform-gpu"
                   onError={(e) => {
                     e.target.src = '/assets/img/carousel-1.jpg';
                   }}
                 />
+                {/* Diagonal glass reflection sweep */}
+                <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-in-out bg-gradient-to-r from-transparent via-white/25 to-transparent pointer-events-none -skew-x-12 z-10" />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#061424] via-transparent to-black/20" />
                 
                 {/* Floating Highlight Tag */}

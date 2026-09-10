@@ -66,11 +66,13 @@ export default function Services({ onOpenBooking }) {
                   <img
                     src={service.image}
                     alt={service.title}
-                    className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-500"
+                    className="w-full h-full object-cover brightness-95 group-hover:brightness-105 transition-all duration-300 transform-gpu"
                     onError={(e) => {
                       e.target.src = '/assets/img/service-1.jpg';
                     }}
                   />
+                  {/* Diagonal glass reflection sweep */}
+                  <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-in-out bg-gradient-to-r from-transparent via-white/20 to-transparent pointer-events-none -skew-x-12 z-10" />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#091e36] via-transparent to-black/20" />
                   
                   {/* Category Tag */}
