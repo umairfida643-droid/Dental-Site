@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Phone, Calendar, Menu, X, Clock, ShieldCheck } from 'lucide-react';
 import { CLINIC_INFO } from '../data/clinicData';
+import WhatsAppIcon from './icons/WhatsAppIcon';
 
 export default function Navbar({ onOpenBooking }) {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -100,10 +101,10 @@ export default function Navbar({ onOpenBooking }) {
                 href={`https://wa.me/${CLINIC_INFO.whatsapp}?text=Hello%20DentCare,%20I%20would%20like%20to%20inquire%20about%20a%20dental%20appointment.`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hidden md:flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-semibold text-emerald-400 bg-emerald-950/40 border border-emerald-800/60 hover:bg-emerald-900/50 transition-all"
+                className="hidden md:flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-semibold text-[#25D366] bg-[#25D366]/10 border border-[#25D366]/30 hover:bg-[#25D366]/20 transition-all shadow-sm"
               >
-                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                WhatsApp Live
+                <WhatsAppIcon className="w-4 h-4 fill-[#25D366]" />
+                <span>WhatsApp Live</span>
               </a>
 
               <button

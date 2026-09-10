@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Calendar, Phone, Clock, User, ShieldCheck, Sparkles, Send } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { SERVICES, DENTISTS, CLINIC_INFO } from '../data/clinicData';
+import WhatsAppIcon from './icons/WhatsAppIcon';
 
 export default function BookingSection() {
   const [name, setName] = useState('');
@@ -192,9 +193,9 @@ export default function BookingSection() {
 
                   <button
                     type="submit"
-                    className="w-full mt-2 py-3.5 rounded-xl font-bold text-xs sm:text-sm text-white bg-gradient-to-r from-cyan-500 to-teal-500 hover:from-cyan-400 hover:to-teal-400 shadow-lg shadow-cyan-500/25 transition-all flex items-center justify-center gap-2"
+                    className="w-full mt-2 py-3.5 rounded-xl font-bold text-xs sm:text-sm text-white bg-gradient-to-r from-[#25D366] via-teal-500 to-cyan-500 hover:brightness-110 shadow-lg shadow-[#25D366]/20 transition-all flex items-center justify-center gap-2"
                   >
-                    <Calendar className="w-4 h-4" />
+                    <WhatsAppIcon className="w-4 h-4 fill-white" />
                     <span>Confirm Slot & Open WhatsApp</span>
                   </button>
 

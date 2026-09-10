@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { X, Calendar, Clock, User, Phone, Mail, CheckCircle2, ShieldCheck, Sparkles, Send } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { SERVICES, DENTISTS, CLINIC_INFO } from '../data/clinicData';
+import WhatsAppIcon from './icons/WhatsAppIcon';
 
 export default function AppointmentModal({ isOpen, onClose, initialServiceId, initialDentistId }) {
   const [selectedService, setSelectedService] = useState(initialServiceId || SERVICES[0].id);
@@ -173,10 +174,10 @@ export default function AppointmentModal({ isOpen, onClose, initialServiceId, in
                     const waText = encodeURIComponent(`Hello DentCare, confirming my booking ref: ${bookingRef} for ${selectedDate}`);
                     window.open(`https://wa.me/${CLINIC_INFO.whatsapp}?text=${waText}`, '_blank');
                   }}
-                  className="px-6 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs sm:text-sm font-semibold flex items-center justify-center gap-2 shadow-lg"
+                  className="px-6 py-3 rounded-xl bg-[#25D366] hover:bg-[#20bd5a] text-white text-xs sm:text-sm font-semibold flex items-center justify-center gap-2 shadow-lg shadow-[#25D366]/30 transition-all"
                 >
-                  <Send className="w-4 h-4" />
-                  Chat on WhatsApp Now
+                  <WhatsAppIcon className="w-4 h-4 fill-white" />
+                  <span>Chat on WhatsApp Now</span>
                 </button>
                 <button
                   onClick={onClose}
