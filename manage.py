@@ -3,6 +3,9 @@
 import os
 import sys
 
+# Ensure DJANGO_SETTINGS_MODULE is set when imported by Vercel or other deployment runners
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'dental_clinic.settings')
+
 
 def main():
     """Run administrative tasks."""
