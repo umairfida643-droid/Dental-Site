@@ -4,32 +4,37 @@ import WhatsAppIcon from './icons/WhatsAppIcon';
 import { CLINIC_INFO } from '../data/clinicData';
 
 export default function Hero({ onOpenBooking }) {
-  // Background slides showcasing dental clinic, procedures, and smiling patients
+  // Background slides showcasing teeth, smile transformations, and dental clinic procedures
   const backgroundSlides = [
     {
       image: '/assets/img/carousel-1.jpg',
-      tag: 'Advanced Clinic Facility',
+      tag: 'Advanced Dental Clinic',
       caption: 'Ultra-Modern Operatory & Digital 3D Diagnostic Suites'
     },
     {
+      image: '/assets/media/services/smile-makeover-with-porcelain-veneers.jpg',
+      tag: 'Smile Makeover',
+      caption: 'Bespoke Porcelain Veneers & Natural Teeth Transformation'
+    },
+    {
       image: '/assets/img/carousel-2.jpg',
-      tag: 'Painless Implantology',
+      tag: 'Implantology Suite',
       caption: 'Computer-Guided Titanium Implants With Lifetime Durability'
     },
     {
       image: '/assets/img/slide1.webp',
-      tag: 'Aesthetic Smile Design',
-      caption: 'Porcelain Veneers & Customized Smile Transformations'
+      tag: 'Clear Aligners & Braces',
+      caption: 'Discreet Orthodontic Teeth Alignment Without Metal Wires'
+    },
+    {
+      image: '/assets/media/services/tooth-scaling-root-planing.jpg',
+      tag: 'Preventive Oral Care',
+      caption: 'Ultrasonic Teeth Scaling, Polishing & Gum Health Care'
     },
     {
       image: '/assets/img/slide6.jpg',
-      tag: 'Rotary Endodontics',
-      caption: 'Single-Sitting Painless Root Canal Treatments'
-    },
-    {
-      image: '/assets/img/about.jpg',
-      tag: 'Compassionate Care',
-      caption: 'Comfortable, Anxiety-Free Dental Treatment for Families'
+      tag: 'Gentle Specialist Care',
+      caption: 'Single-Sitting Painless Rotary Root Canal Treatment'
     }
   ];
 
@@ -78,8 +83,8 @@ export default function Hero({ onOpenBooking }) {
   return (
     <section className="relative min-h-[90vh] lg:min-h-[92vh] flex items-center pt-8 pb-16 lg:py-20 overflow-hidden select-none">
       
-      {/* 1. Full-Bleed Dark Carousel Background Slides */}
-      <div className="absolute inset-0 z-0 overflow-hidden">
+      {/* 1. Full-Bleed Dark Carousel Background Slides with Cinematic Dark Overlay */}
+      <div className="absolute inset-0 z-0 overflow-hidden bg-[#030914]">
         {backgroundSlides.map((slide, idx) => (
           <div
             key={idx}
@@ -90,7 +95,7 @@ export default function Hero({ onOpenBooking }) {
             <img
               src={slide.image}
               alt={slide.caption}
-              className={`w-full h-full object-cover object-center filter brightness-90 transform transition-transform duration-[6000ms] ${
+              className={`w-full h-full object-cover object-center filter brightness-[0.38] contrast-125 saturate-110 transform transition-transform duration-[6000ms] ${
                 idx === currentSlide ? 'scale-105' : 'scale-100'
               }`}
               onError={(e) => {
@@ -100,14 +105,17 @@ export default function Hero({ onOpenBooking }) {
           </div>
         ))}
 
-        {/* Sophisticated Dark Gradient & Tint Overlay for Maximum Readability */}
-        <div className="absolute inset-0 z-20 bg-gradient-to-r from-[#050e18]/96 via-[#071729]/88 to-[#050e18]/94 backdrop-blur-[2px]" />
+        {/* Dark Cinematic Gradient Overlay - Keeps teeth slides visible while maintaining rich dark contrast */}
+        <div className="absolute inset-0 z-20 bg-gradient-to-r from-[#030a14]/85 via-[#051324]/75 to-[#030a14]/85 pointer-events-none" />
         
-        {/* Radial ambient vignette to frame center content */}
-        <div className="absolute inset-0 z-20 bg-[radial-gradient(ellipse_at_top,_transparent_20%,_#050e18_90%)]" />
+        {/* Top and Bottom soft vignette fade for smooth page blending */}
+        <div className="absolute inset-0 z-20 bg-gradient-to-b from-[#061220]/75 via-transparent to-[#061220] pointer-events-none" />
+        
+        {/* Radial ambient vignette to focus on text content */}
+        <div className="absolute inset-0 z-20 bg-[radial-gradient(ellipse_at_center,_transparent_30%,_#030a14_90%)] opacity-75 pointer-events-none" />
         
         {/* Subtle cyan ambient glow */}
-        <div className="absolute top-1/4 left-1/3 -translate-x-1/2 w-96 h-96 bg-cyan-500/15 rounded-full blur-[140px] pointer-events-none z-20" />
+        <div className="absolute top-1/4 left-1/3 -translate-x-1/2 w-96 h-96 bg-cyan-500/10 rounded-full blur-[140px] pointer-events-none z-20" />
       </div>
 
       {/* 2. Main Hero Grid Content */}
