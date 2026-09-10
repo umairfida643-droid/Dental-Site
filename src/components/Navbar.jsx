@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link, NavLink } from 'react-router-dom';
 import { Phone, Calendar, Menu, X, Clock, ShieldCheck } from 'lucide-react';
 import { CLINIC_INFO } from '../data/clinicData';
 import WhatsAppIcon from './icons/WhatsAppIcon';
@@ -16,12 +17,14 @@ export default function Navbar({ onOpenBooking }) {
   }, []);
 
   const navLinks = [
-    { name: 'Services', href: '#services' },
-    { name: 'Before & After', href: '#before-after' },
-    { name: 'Chief Consultant', href: '#dentists' },
-    { name: 'Why dentbites', href: '#why-us' },
-    { name: 'Testimonials', href: '#testimonials' },
-    { name: 'FAQ', href: '#faq' }
+    { name: 'Home', href: '/' },
+    { name: 'Services', href: '/services' },
+    { name: 'Before & After', href: '/before-after' },
+    { name: 'Chief Consultant', href: '/chief-consultant' },
+    { name: 'Why dentbites', href: '/why-us' },
+    { name: 'Testimonials', href: '/testimonials' },
+    { name: 'FAQ', href: '/faq' },
+    { name: 'Contact', href: '/contact' }
   ];
 
   return (
@@ -52,31 +55,58 @@ export default function Navbar({ onOpenBooking }) {
       <header 
         className={`sticky top-0 z-40 transition-all duration-300 ${
           isScrolled 
-            ? 'bg-[#071321]/85 backdrop-blur-xl border-b border-cyan-500/20 shadow-2xl shadow-cyan-950/40 py-3' 
-            : 'bg-transparent py-5'
+            ? 'bg-[#071321]/90 backdrop-blur-xl border-b border-cyan-500/20 shadow-2xl shadow-cyan-950/40 py-2.5' 
+            : 'bg-transparent py-4'
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between">
             {/* Logo */}
-            <a href="#" className="flex items-center group py-0.5">
+            <Link to="/" className="flex items-center group py-0.5">
               <img 
                 src="/assets/img/Logo.png" 
                 alt="dentbites" 
-                className="h-14 sm:h-16 md:h-20 w-auto object-contain filter drop-shadow-[0_4px_14px_rgba(87,202,219,0.35)] group-hover:scale-105 transition-transform duration-300"
+                className="h-12 sm:h-14 md:h-16 w-auto object-contain filter drop-shadow-[0_4px_14px_rgba(87,202,219,0.35)] group-hover:scale-105 transition-transform duration-300"
               />
-            </a>
+            </Link>
 
             {/* Desktop Navigation Links */}
-            <nav className="hidden lg:flex items-center gap-1">
+            <nav className="hidden xl:flex items-center gap-1">
               {navLinks.map((link) => (
-                <a
+                <NavLink
                   key={link.name}
-                  href={link.href}
-                  className="px-3.5 py-2 text-sm font-medium text-slate-300 hover:text-cyan-400 hover:bg-cyan-950/30 rounded-lg transition-colors"
+                  to={link.href}
+                  end={link.href === '/'}
+                  className={({ isActive }) =>
+                    `px-3 py-1.5 text-xs lg:text-sm rounded-lg transition-all ${
+                      isActive
+                        ? 'text-cyan-300 bg-cyan-950/70 border border-cyan-500/30 font-semibold shadow-sm'
+                        : 'text-slate-300 hover:text-cyan-400 hover:bg-cyan-950/30 font-medium'
+                    }`
+                  }
                 >
                   {link.name}
-                </a>
+                </NavLink>
+              ))}
+            </nav>
+
+            {/* Tablet Navigation Links (compact) */}
+            <nav className="hidden lg:flex xl:hidden items-center gap-1">
+              {navLinks.slice(0, 5).map((link) => (
+                <NavLink
+                  key={link.name}
+                  to={link.href}
+                  end={link.href === '/'}
+                  className={({ isActive }) =>
+                    `px-2.5 py-1 text-xs rounded-lg transition-all ${
+                      isActive
+                        ? 'text-cyan-300 bg-cyan-950/70 border border-cyan-500/30 font-semibold'
+                        : 'text-slate-300 hover:text-cyan-400 hover:bg-cyan-950/30 font-medium'
+                    }`
+                  }
+                >
+                  {link.name}
+                </NavLink>
               ))}
             </nav>
 
@@ -86,7 +116,7 @@ export default function Navbar({ onOpenBooking }) {
                 href={`https://wa.me/${CLINIC_INFO.whatsapp}?text=Hello%20dentbites,%20I%20would%20like%20to%20inquire%20about%20a%20dental%20appointment.`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hidden md:flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-semibold text-[#25D366] bg-[#25D366]/10 border border-[#25D366]/30 hover:bg-[#25D366]/20 transition-all shadow-sm"
+                className="hidden md:flex items-center gap-2 px-3 py-2 rounded-xl text-xs font-semibold text-[#25D366] bg-[#25D366]/10 border border-[#25D366]/30 hover:bg-[#25D366]/20 transition-all shadow-sm"
               >
                 <WhatsAppIcon className="w-4 h-4 fill-[#25D366]" />
                 <span>WhatsApp Live</span>
@@ -94,7 +124,7 @@ export default function Navbar({ onOpenBooking }) {
 
               <button
                 onClick={onOpenBooking}
-                className="flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold text-white bg-gradient-to-r from-cyan-500 to-sky-600 hover:from-cyan-400 hover:to-sky-500 shadow-lg shadow-cyan-500/25 hover:shadow-cyan-500/40 hover:-translate-y-0.5 transition-all duration-200"
+                className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold text-white bg-gradient-to-r from-cyan-500 to-sky-600 hover:from-cyan-400 hover:to-sky-500 shadow-lg shadow-cyan-500/25 hover:shadow-cyan-500/40 hover:-translate-y-0.5 transition-all duration-200"
               >
                 <Calendar className="w-4 h-4" />
                 <span>Book Appointment</span>
@@ -114,19 +144,26 @@ export default function Navbar({ onOpenBooking }) {
 
         {/* Mobile Dropdown Menu */}
         {mobileMenuOpen && (
-          <div className="lg:hidden bg-[#071321]/95 backdrop-blur-2xl border-b border-cyan-500/20 px-4 pt-3 pb-6 mt-3 animate-fadeIn">
-            <nav className="flex flex-col gap-2">
+          <div className="lg:hidden bg-[#071321]/98 backdrop-blur-2xl border-b border-cyan-500/20 px-4 pt-3 pb-6 mt-3 animate-fadeIn">
+            <nav className="flex flex-col gap-1.5">
               {navLinks.map((link) => (
-                <a
+                <NavLink
                   key={link.name}
-                  href={link.href}
+                  to={link.href}
+                  end={link.href === '/'}
                   onClick={() => setMobileMenuOpen(false)}
-                  className="px-4 py-2.5 text-sm font-medium text-slate-200 hover:text-cyan-400 hover:bg-cyan-950/40 rounded-lg transition"
+                  className={({ isActive }) =>
+                    `px-4 py-2.5 text-sm rounded-xl transition ${
+                      isActive
+                        ? 'text-cyan-300 bg-cyan-950/80 border border-cyan-500/40 font-bold'
+                        : 'text-slate-200 hover:text-cyan-400 hover:bg-cyan-950/40 font-medium'
+                    }`
+                  }
                 >
                   {link.name}
-                </a>
+                </NavLink>
               ))}
-              <div className="pt-3 border-t border-slate-800 flex flex-col gap-2.5">
+              <div className="pt-3 border-t border-slate-800 flex flex-col gap-2.5 mt-2">
                 <button
                   onClick={() => {
                     setMobileMenuOpen(false);

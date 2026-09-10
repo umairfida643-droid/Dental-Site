@@ -1,17 +1,20 @@
 import React, { useState } from 'react';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import ScrollToTop from './components/ScrollToTop';
 import Navbar from './components/Navbar';
-import Hero from './components/Hero';
-import StatsBar from './components/StatsBar';
-import BeforeAfterSlider from './components/BeforeAfterSlider';
-import Services from './components/Services';
-import WhyChooseUs from './components/WhyChooseUs';
-import Dentists from './components/Dentists';
-import BookingSection from './components/BookingSection';
-import Testimonials from './components/Testimonials';
-import FAQ from './components/FAQ';
 import Footer from './components/Footer';
 import AppointmentModal from './components/AppointmentModal';
 import FloatingWhatsApp from './components/FloatingWhatsApp';
+
+// Dedicated Page Views
+import HomePage from './pages/HomePage';
+import ServicesPage from './pages/ServicesPage';
+import BeforeAfterPage from './pages/BeforeAfterPage';
+import ChiefConsultantPage from './pages/ChiefConsultantPage';
+import WhyUsPage from './pages/WhyUsPage';
+import TestimonialsPage from './pages/TestimonialsPage';
+import FAQPage from './pages/FAQPage';
+import ContactPage from './pages/ContactPage';
 
 export default function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -29,36 +32,48 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#061220] text-slate-100 flex flex-col font-sans selection:bg-cyan-500 selection:text-white">
-      {/* Top Navigation */}
-      <Navbar onOpenBooking={() => handleOpenBooking()} />
+    <BrowserRouter>
+      {/* Resets scroll to top upon page navigation */}
+      <ScrollToTop />
 
-      {/* Main Content Sections */}
-      <main className="flex-1">
-        <Hero onOpenBooking={() => handleOpenBooking()} />
-        <StatsBar />
-        <BeforeAfterSlider onOpenBooking={() => handleOpenBooking()} />
-        <Services onOpenBooking={handleOpenBooking} />
-        <WhyChooseUs onOpenBooking={() => handleOpenBooking()} />
-        <Dentists onOpenBooking={handleOpenBooking} />
-        <BookingSection />
-        <Testimonials />
-        <FAQ />
-      </main>
+      <div className="min-h-screen bg-[#061220] text-slate-100 flex flex-col font-sans selection:bg-cyan-500 selection:text-white">
+        {/* Top Global Navigation */}
+        <Navbar onOpenBooking={() => handleOpenBooking()} />
 
-      {/* Footer */}
-      <Footer onOpenBooking={handleOpenBooking} />
+        {/* Multi-Page Route Render */}
+        <main className="flex-1">
+          <Routes>
+            {/* 1. Home Route: Untouched Hero & complete homepage preserved */}
+            <Route path="/" element={<HomePage onOpenBooking={handleOpenBooking} />} />
 
-      {/* Interactive Global Appointment Modal */}
-      <AppointmentModal
-        isOpen={isModalOpen}
-        onClose={handleCloseBooking}
-        initialServiceId={selectedServiceId}
-        initialDentistId={selectedDentistId}
-      />
+            {/* 2. Dedicated Full-Fledged Menu Pages */}
+            <Route path="/services" element={<ServicesPage onOpenBooking={handleOpenBooking} />} />
+            <Route path="/before-after" element={<BeforeAfterPage onOpenBooking={handleOpenBooking} />} />
+            <Route path="/chief-consultant" element={<ChiefConsultantPage onOpenBooking={handleOpenBooking} />} />
+            <Route path="/why-us" element={<WhyUsPage onOpenBooking={handleOpenBooking} />} />
+            <Route path="/testimonials" element={<TestimonialsPage onOpenBooking={handleOpenBooking} />} />
+            <Route path="/faq" element={<FAQPage onOpenBooking={handleOpenBooking} />} />
+            <Route path="/contact" element={<ContactPage onOpenBooking={handleOpenBooking} />} />
 
-      {/* Floating Instant WhatsApp Button */}
-      <FloatingWhatsApp />
-    </div>
+            {/* Fallback Route */}
+            <Route path="*" element={<Navigate to="/" replace />} />
+          </Routes>
+        </main>
+
+        {/* Global Footer with Dedicated Page Links */}
+        <Footer onOpenBooking={handleOpenBooking} />
+
+        {/* Global Interactive Appointment Modal */}
+        <AppointmentModal
+          isOpen={isModalOpen}
+          onClose={handleCloseBooking}
+          initialServiceId={selectedServiceId}
+          initialDentistId={selectedDentistId}
+        />
+
+        {/* Floating Instant WhatsApp Button */}
+        <FloatingWhatsApp />
+      </div>
+    </BrowserRouter>
   );
 }

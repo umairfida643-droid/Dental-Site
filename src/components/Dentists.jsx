@@ -1,5 +1,6 @@
 import React from 'react';
-import { Award, Clock, Calendar, CheckCircle2, Sparkles, ShieldCheck, Stethoscope, Star, Check } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { Award, Clock, Calendar, CheckCircle2, Sparkles, ShieldCheck, Stethoscope, Star, Check, ArrowRight } from 'lucide-react';
 import WhatsAppIcon from './icons/WhatsAppIcon';
 import { DENTISTS, CLINIC_INFO } from '../data/clinicData';
 
@@ -170,6 +171,17 @@ export default function Dentists({ onOpenBooking }) {
                   <WhatsAppIcon className="w-5 h-5 fill-white" />
                   <span>WhatsApp Doctor</span>
                 </a>
+              </div>
+
+              <div className="mt-5 pt-4 border-t border-white/5 flex items-center justify-between text-xs">
+                <span className="text-slate-400">Want to see Dr. Hafeez's complete credentials & timeline?</span>
+                <Link
+                  to="/chief-consultant"
+                  className="inline-flex items-center gap-1.5 font-bold text-cyan-400 hover:text-cyan-300 transition"
+                >
+                  <span>Explore Full Profile</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </Link>
               </div>
 
             </div>

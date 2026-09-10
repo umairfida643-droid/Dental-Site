@@ -1,5 +1,6 @@
 import React from 'react';
-import { MapPin, Phone, Mail, Clock, ShieldCheck, Heart, ArrowUp } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { MapPin, Phone, Mail, Clock, ShieldCheck, ArrowUp } from 'lucide-react';
 import { CLINIC_INFO, SERVICES } from '../data/clinicData';
 
 export default function Footer({ onOpenBooking }) {
@@ -16,13 +17,13 @@ export default function Footer({ onOpenBooking }) {
           
           {/* Brand Col */}
           <div className="lg:col-span-2 space-y-4">
-            <a href="#" className="inline-block group mb-1">
+            <Link to="/" className="inline-block group mb-1">
               <img 
                 src="/assets/img/Logo.png" 
                 alt="dentbites" 
                 className="h-16 sm:h-20 w-auto object-contain filter drop-shadow-[0_4px_14px_rgba(87,202,219,0.35)] group-hover:scale-105 transition-transform duration-300" 
               />
-            </a>
+            </Link>
 
             <p className="text-xs text-slate-300 leading-relaxed max-w-sm">
               Dedicated to pain-free, world-class dental care with computer-guided 3D diagnostics, certified implant specialists, and Class-B European sterilization protocols.
@@ -34,16 +35,18 @@ export default function Footer({ onOpenBooking }) {
             </div>
           </div>
 
-          {/* Quick Links */}
+          {/* Dedicated Page Quick Links */}
           <div>
-            <h4 className="text-sm font-bold text-white uppercase tracking-wider mb-4">Quick Links</h4>
+            <h4 className="text-sm font-bold text-white uppercase tracking-wider mb-4">Dedicated Pages</h4>
             <ul className="space-y-2.5 text-xs">
-              <li><a href="#services" className="hover:text-cyan-400 transition">Our Treatments</a></li>
-              <li><a href="#before-after" className="hover:text-cyan-400 transition">Before & After Showcase</a></li>
-              <li><a href="#dentists" className="hover:text-cyan-400 transition">Chief Consultant Profile</a></li>
-              <li><a href="#why-us" className="hover:text-cyan-400 transition">Why Choose dentbites</a></li>
-              <li><a href="#testimonials" className="hover:text-cyan-400 transition">Patient Reviews</a></li>
-              <li><a href="#faq" className="hover:text-cyan-400 transition">FAQs</a></li>
+              <li><Link to="/" className="hover:text-cyan-400 transition">Home</Link></li>
+              <li><Link to="/services" className="hover:text-cyan-400 transition">Our Treatments</Link></li>
+              <li><Link to="/before-after" className="hover:text-cyan-400 transition">Before & After Showcase</Link></li>
+              <li><Link to="/chief-consultant" className="hover:text-cyan-400 transition">Chief Consultant Profile</Link></li>
+              <li><Link to="/why-us" className="hover:text-cyan-400 transition">Why Choose dentbites</Link></li>
+              <li><Link to="/testimonials" className="hover:text-cyan-400 transition">Patient Reviews</Link></li>
+              <li><Link to="/faq" className="hover:text-cyan-400 transition">FAQs</Link></li>
+              <li><Link to="/contact" className="hover:text-cyan-400 transition">Contact & Location</Link></li>
             </ul>
           </div>
 
@@ -51,14 +54,14 @@ export default function Footer({ onOpenBooking }) {
           <div>
             <h4 className="text-sm font-bold text-white uppercase tracking-wider mb-4">Treatments</h4>
             <ul className="space-y-2.5 text-xs">
-              {SERVICES.slice(0, 5).map((s) => (
+              {SERVICES.slice(0, 6).map((s) => (
                 <li key={s.id}>
-                  <button 
-                    onClick={() => onOpenBooking(s.id)}
-                    className="hover:text-cyan-400 transition text-left"
+                  <Link
+                    to="/services"
+                    className="hover:text-cyan-400 transition text-left block"
                   >
                     {s.title}
-                  </button>
+                  </Link>
                 </li>
               ))}
             </ul>

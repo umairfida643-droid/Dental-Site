@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Calendar, Clock, Sparkles, Check, ArrowUpRight } from 'lucide-react';
 import { SERVICES } from '../data/clinicData';
 
@@ -132,6 +133,17 @@ export default function Services({ onOpenBooking }) {
 
             </div>
           ))}
+        </div>
+
+        {/* Explore Full Services Page CTA */}
+        <div className="mt-12 text-center">
+          <Link
+            to="/services"
+            className="inline-flex items-center gap-2 px-7 py-3.5 rounded-2xl font-bold text-xs sm:text-sm text-white bg-slate-900/90 hover:bg-cyan-950 border border-cyan-500/30 hover:border-cyan-400 shadow-xl shadow-cyan-950/40 hover:-translate-y-0.5 transition-all duration-300"
+          >
+            <span>Explore Full Treatments Catalog & Clinical Steps</span>
+            <ArrowUpRight className="w-4 h-4 text-cyan-400" />
+          </Link>
         </div>
 
       </div>

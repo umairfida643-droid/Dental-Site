@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Sparkles, MoveHorizontal, Check, ShieldCheck } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { Sparkles, MoveHorizontal, Check, ShieldCheck, ArrowRight } from 'lucide-react';
 
 export default function BeforeAfterSlider({ onOpenBooking }) {
   const [sliderPosition, setSliderPosition] = useState(50);
@@ -173,6 +174,16 @@ export default function BeforeAfterSlider({ onOpenBooking }) {
               >
                 Schedule 3D Smile Consultation
               </button>
+
+              <div className="mt-3 text-center">
+                <Link
+                  to="/before-after"
+                  className="inline-flex items-center gap-1.5 text-xs font-bold text-cyan-400 hover:text-cyan-300 transition"
+                >
+                  <span>Explore Full Transformation Gallery</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </Link>
+              </div>
             </div>
 
           </div>
