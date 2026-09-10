@@ -1,0 +1,163 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Book an Appointment | Dental Bites{% endblock %}
+{% block meta_description %}Book a dental appointment online with Dental Bites. Choose your dentist, service, date and available time, and receive confirmation by email and WhatsApp.{% endblock %}
+
+{% block content %}
+<section class="appointment-page">
+  <div class="appointment-hero">
+    <div class="container position-relative">
+      <div class="row align-items-center g-4 g-xl-5">
+        <div class="col-lg-5">
+          <span class="eyebrow"><i class="fa fa-shield-alt me-2"></i>Trusted Dental Care</span>
+          <h1 class="display-4 fw-bold text-white mt-3 mb-3">Your smile deserves <span>expert care.</span></h1>
+          <p class="lead text-white-50 mb-4">Request your appointment in less than a minute. Our team will review it and send the final confirmation to your email and WhatsApp.</p>
+
+          <div class="appointment-benefits">
+            <div><i class="fa fa-check-circle"></i><span>Verified appointment slots</span></div>
+            <div><i class="fa fa-check-circle"></i><span>Email + WhatsApp updates</span></div>
+            <div><i class="fa fa-check-circle"></i><span>Experienced dental professionals</span></div>
+          </div>
+
+          <div class="appointment-contact-card mt-4">
+            <div class="contact-icon"><i class="fab fa-whatsapp"></i></div>
+            <div>
+              <small>Need help before booking?</small>
+              <a href="https://wa.me/923040570505" target="_blank" rel="noopener">Chat on WhatsApp</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-7">
+          <div class="appointment-card">
+            <div class="appointment-card-head">
+              <div>
+                <span class="mini-label">ONLINE BOOKING</span>
+                <h2>Request an appointment</h2>
+                <p>Choose your preferred service, dentist and time.</p>
+              </div>
+              <div class="secure-badge"><i class="fa fa-lock"></i> Secure</div>
+            </div>
+
+            {% if messages %}
+              {% for message in messages %}
+                <div class="booking-alert {% if message.tags == 'error' %}booking-alert-error{% else %}booking-alert-success{% endif %}">
+                  <i class="fa {% if message.tags == 'error' %}fa-exclamation-circle{% else %}fa-check-circle{% endif %}"></i>
+                  <span>{{ message }}</span>
+                </div>
+              {% endfor %}
+            {% endif %}
+
+            {% if form.non_field_errors %}
+              <div class="booking-alert booking-alert-error"><i class="fa fa-exclamation-circle"></i><span>{{ form.non_field_errors|striptags }}</span></div>
+            {% endif %}
+
+            <form method="POST" id="appointmentForm" novalidate>
+              {% csrf_token %}
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <label for="id_service">Dental service</label>
+                  <select name="service" id="id_service" class="form-control premium-input" required>
+                    <option value="">Select a service</option>
+                    {% for service in services %}<option value="{{ service.title }}" {% if form.service.value == service.title %}selected{% endif %}>{{ service.title }}</option>{% endfor %}
+                  </select>
+                  {% for error in form.service.errors %}<small class="field-error">{{ error }}</small>{% endfor %}
+                </div>
+
+                <div class="col-md-6">
+                  <label for="id_dentist">Preferred dentist</label>
+                  <select name="dentist" id="id_dentist" class="form-control premium-input" required>
+                    <option value="">Select a dentist</option>
+                    {% for dentist in dentists %}<option value="{{ dentist.name }}" {% if form.dentist.value == dentist.name %}selected{% endif %}>{{ dentist.name }}</option>{% endfor %}
+                  </select>
+                  {% for error in form.dentist.errors %}<small class="field-error">{{ error }}</small>{% endfor %}
+                </div>
+
+                <div class="col-md-6">
+                  <label for="id_name">Patient name</label>
+                  <input type="text" name="name" id="id_name" value="{{ form.name.value|default:'' }}" class="form-control premium-input" placeholder="Full name" autocomplete="name" required>
+                  {% for error in form.name.errors %}<small class="field-error">{{ error }}</small>{% endfor %}
+                </div>
+
+                <div class="col-md-6">
+                  <label for="id_email">Email address</label>
+                  <input type="email" name="email" id="id_email" value="{{ form.email.value|default:'' }}" class="form-control premium-input" placeholder="you@example.com" autocomplete="email" required>
+                  {% for error in form.email.errors %}<small class="field-error">{{ error }}</small>{% endfor %}
+                </div>
+
+                <div class="col-12">
+                  <label for="id_phone">WhatsApp / mobile number <span>*</span></label>
+                  <div class="input-with-icon">
+                    <i class="fab fa-whatsapp"></i>
+                    <input type="tel" name="phone" id="id_phone" value="{{ form.phone.value|default:'' }}" class="form-control premium-input" placeholder="+92 300 1234567" autocomplete="tel" inputmode="tel" required>
+                  </div>
+                  <small class="input-help">Use your country code. This number will receive appointment updates.</small>
+                  {% for error in form.phone.errors %}<small class="field-error">{{ error }}</small>{% endfor %}
+                </div>
+
+                <div class="col-md-6">
+                  <label for="id_appointment_date">Preferred date</label>
+                  <input type="date" name="appointment_date" id="id_appointment_date" value="{{ form.appointment_date.value|default:'' }}" class="form-control premium-input" min="{{ today }}" required>
+                  {% for error in form.appointment_date.errors %}<small class="field-error">{{ error }}</small>{% endfor %}
+                </div>
+
+                <div class="col-md-6">
+                  <label>Preferred time</label>
+                  <div class="slot-summary" id="slotSummary"><i class="far fa-clock"></i><span>Select a date and dentist</span></div>
+                </div>
+
+                <div class="col-12">
+                  <div class="slot-heading"><span><i class="far fa-clock me-2"></i>Available time slots</span><small>Every {{ slot_minutes }} minutes · 3:00 PM–11:00 PM</small></div>
+                  <div id="slotHelper" class="slot-helper">Choose a dentist and date to load available times.</div>
+                  <div id="slotGrid" class="slot-grid"></div>
+                  <input type="hidden" name="appointment_time" id="id_appointment_time" value="{{ form.appointment_time.value|default:'' }}" required>
+                  {% for error in form.appointment_time.errors %}<small class="field-error">{{ error }}</small>{% endfor %}
+                </div>
+
+                <div class="col-12">
+                  <label for="id_notes">Notes <small>(optional)</small></label>
+                  <textarea name="notes" id="id_notes" class="form-control premium-input" rows="3" placeholder="Reason for visit, symptoms or any special request">{{ form.notes.value|default:'' }}</textarea>
+                </div>
+
+                <div class="col-12">
+                  <button class="appointment-submit" type="submit" id="bookNowBtn"><span>Request Appointment</span><i class="fa fa-arrow-right"></i></button>
+                </div>
+                <div class="col-12">
+                  <p class="form-footnote"><i class="fa fa-info-circle me-1"></i>Your request is not final until the clinic confirms it. Confirmation is sent by email and WhatsApp.</p>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="toast-notify-container" id="toastNotifyContainer" aria-live="polite" aria-atomic="true"></div>
+
+<style>
+.appointment-page{background:#f5f8fb}.appointment-hero{position:relative;padding:90px 0 100px;background:radial-gradient(circle at 15% 20%,rgba(35,191,173,.18),transparent 32%),linear-gradient(135deg,#071a2b 0%,#0a2d46 55%,#0b5961 100%);overflow:hidden}.appointment-hero:after{content:"";position:absolute;width:520px;height:520px;border:1px solid rgba(255,255,255,.08);border-radius:50%;right:-180px;top:-170px}.eyebrow,.mini-label{display:inline-flex;align-items:center;font-size:12px;font-weight:800;letter-spacing:1.7px;color:#36d0bd}.appointment-hero h1{line-height:1.1}.appointment-hero h1 span{color:#54e0ce}.appointment-benefits{display:grid;gap:13px}.appointment-benefits div{display:flex;align-items:center;gap:11px;color:#e8f4f6}.appointment-benefits i{color:#43d2bf}.appointment-contact-card{display:flex;align-items:center;gap:14px;max-width:330px;padding:14px 16px;border:1px solid rgba(255,255,255,.12);border-radius:16px;background:rgba(255,255,255,.06);backdrop-filter:blur(12px)}.contact-icon{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;background:#25d366;color:#fff;font-size:22px}.appointment-contact-card small{display:block;color:#a9c0c9}.appointment-contact-card a{font-weight:700;color:#fff;text-decoration:none}.appointment-card{position:relative;z-index:2;background:#fff;border:1px solid #e2eaf0;border-radius:24px;padding:30px;box-shadow:0 30px 70px rgba(2,22,36,.25)}.appointment-card-head{display:flex;justify-content:space-between;gap:20px;align-items:flex-start;margin-bottom:22px}.appointment-card h2{font-size:28px;color:#0b2335;margin:6px 0}.appointment-card-head p{color:#708391;margin:0}.secure-badge{padding:7px 11px;border-radius:999px;background:#edf9f7;color:#168d80;font-size:12px;font-weight:700;white-space:nowrap}.premium-input{min-height:50px;border:1px solid #d8e2e8;border-radius:12px;background:#fbfcfd;color:#102a3b;padding:12px 14px}.premium-input:focus{border-color:#27bca9;box-shadow:0 0 0 4px rgba(39,188,169,.12);background:#fff}.appointment-card label{font-size:13px;font-weight:800;color:#304858;margin-bottom:7px;display:block}.appointment-card label span{color:#e55353}.appointment-card label small{font-weight:600;color:#8495a0}.input-with-icon{position:relative}.input-with-icon i{position:absolute;left:15px;top:17px;color:#25a96a;z-index:2}.input-with-icon input{padding-left:42px}.input-help,.form-footnote{color:#7b8e9a;font-size:12px}.field-error{display:block;color:#c0392b;margin-top:5px}.slot-heading{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:8px;color:#304858;font-weight:800;font-size:13px}.slot-heading small{font-weight:600;color:#8495a0}.slot-helper{font-size:12px;color:#80919b;margin-bottom:8px}.slot-summary{min-height:50px;display:flex;align-items:center;gap:9px;padding:12px 14px;border:1px dashed #cbd8df;border-radius:12px;color:#7b8d98;background:#fbfcfd;font-size:13px}.slot-summary.selected{border-style:solid;border-color:#27bca9;background:#eefaf8;color:#0d7066;font-weight:800}.slot-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px;max-height:190px;overflow:auto;padding:10px;border:1px solid #e0e8ed;border-radius:14px;background:#f7fafb}.slot-btn{border:1px solid #d7e2e8;background:#fff;color:#294556;border-radius:9px;padding:9px 4px;font-size:12px;font-weight:700;cursor:pointer;transition:.2s}.slot-btn:hover:not(.slot-booked){border-color:#27bca9;color:#0c8b7c;transform:translateY(-1px)}.slot-btn.slot-selected{background:#0f9f8d;border-color:#0f9f8d;color:#fff;box-shadow:0 7px 16px rgba(15,159,141,.25)}.slot-btn.slot-booked{background:#edf0f2;color:#a2adb3;border-color:#e3e7e9;cursor:not-allowed;text-decoration:line-through}.slot-grid-empty{grid-column:1/-1;text-align:center;padding:15px;color:#8796a0;font-size:13px}.appointment-submit{width:100%;border:0;border-radius:13px;min-height:54px;padding:12px 18px;display:flex;justify-content:center;align-items:center;gap:12px;background:linear-gradient(135deg,#0c8f80,#0b5961);color:#fff;font-weight:800;box-shadow:0 12px 24px rgba(11,89,97,.22);transition:.25s}.appointment-submit:hover{transform:translateY(-2px);box-shadow:0 16px 30px rgba(11,89,97,.28)}.appointment-submit:disabled{opacity:.65;transform:none}.booking-alert{display:flex;gap:10px;align-items:flex-start;padding:12px 14px;border-radius:12px;margin-bottom:15px;font-size:13px}.booking-alert-success{background:#eaf9f5;color:#147c70}.booking-alert-error{background:#fff1f0;color:#a8332c}.toast-notify-container{position:fixed;right:20px;top:90px;z-index:3000}.toast-notify{background:#102b3d;color:#fff;padding:12px 16px;border-radius:12px;margin-bottom:10px;box-shadow:0 12px 30px rgba(0,0,0,.25);opacity:0;transform:translateY(-8px);transition:.25s}.toast-show{opacity:1;transform:none}@media(max-width:767.98px){.appointment-hero{padding:50px 0 60px}.appointment-hero h1{font-size:2.45rem}.appointment-card{padding:20px;border-radius:18px}.appointment-card-head{display:block}.secure-badge{display:inline-block;margin-top:10px}.slot-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.slot-heading{display:block}.slot-heading small{display:block;margin-top:4px}.appointment-contact-card{max-width:none}.toast-notify-container{left:12px;right:12px;top:12px}}
+@media(max-width:390px){.appointment-hero h1{font-size:2rem}.slot-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.appointment-card{padding:16px}}
+</style>
+
+<script>
+(function(){
+  const OPEN='{{ clinic_open|default:"15:00" }}', CLOSE='{{ clinic_close|default:"23:00" }}', STEP=parseInt('{{ slot_minutes|default:15 }}',10);
+  const date=document.getElementById('id_appointment_date'), dentist=document.getElementById('id_dentist'), service=document.getElementById('id_service');
+  const grid=document.getElementById('slotGrid'), helper=document.getElementById('slotHelper'), hidden=document.getElementById('id_appointment_time'), summary=document.getElementById('slotSummary'), form=document.getElementById('appointmentForm'), submit=document.getElementById('bookNowBtn');
+  if(!date||!dentist)return;
+  function mins(v){const p=v.split(':');return +p[0]*60 + +p[1]}
+  function value(m){return String(Math.floor(m/60)).padStart(2,'0')+':'+String(m%60).padStart(2,'0')}
+  function label(m){let h=Math.floor(m/60),x=m%60,p=h>=12?'PM':'AM',h12=h%12||12;return h12+':'+String(x).padStart(2,'0')+' '+p}
+  function toast(text){const c=document.getElementById('toastNotifyContainer'),t=document.createElement('div');t.className='toast-notify';t.textContent=text;c.appendChild(t);requestAnimationFrame(()=>t.classList.add('toast-show'));setTimeout(()=>t.remove(),4200)}
+  function clear(){hidden.value='';summary.classList.remove('selected');summary.querySelector('span').textContent='Select a time slot';grid.querySelectorAll('.slot-selected').forEach(x=>x.classList.remove('slot-selected'))}
+  function build(booked){grid.innerHTML='';const set=new Set(booked||[]);let count=0;for(let m=mins(OPEN);m<mins(CLOSE);m+=STEP){const v=value(m),b=document.createElement('button');b.type='button';b.className='slot-btn';b.textContent=label(m);if(set.has(v)){b.classList.add('slot-booked');b.title='Already booked';b.onclick=()=>toast('That time is already booked. Please choose another slot.')}else{b.onclick=()=>{grid.querySelectorAll('.slot-selected').forEach(x=>x.classList.remove('slot-selected'));b.classList.add('slot-selected');hidden.value=v;summary.classList.add('selected');summary.querySelector('span').textContent=label(m)}}grid.appendChild(b);count++}if(!count)grid.innerHTML='<div class="slot-grid-empty">No appointment slots are configured.</div>'}
+  function refresh(){clear();if(!date.value||!dentist.value){grid.innerHTML='';helper.textContent='Choose a dentist and date to load available times.';return}helper.textContent='Checking live availability…';fetch('{% url "booked_slots" %}?date='+encodeURIComponent(date.value)+'&dentist='+encodeURIComponent(dentist.value)).then(r=>r.json()).then(d=>{build(d.booked||[]);helper.textContent='Select an available time. Grey slots are already booked.'}).catch(()=>{build([]);helper.textContent='Select an available time.'})}
+  date.addEventListener('change',refresh);dentist.addEventListener('change',refresh);
+  form.addEventListener('submit',e=>{if(!service.value||!dentist.value||!date.value||!hidden.value){e.preventDefault();toast('Please complete the service, dentist, date and time selection.');return}submit.disabled=true;submit.querySelector('span').textContent='Submitting…'});
+  if(date.value&&dentist.value)refresh();
+})();
+</script>
+{% endblock %}

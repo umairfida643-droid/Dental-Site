@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Cases - DentCare{% endblock %}
+
+{% block content %}
+
+<!-- Hero Start -->
+<div class="container-fluid bg-primary py-5 hero-header mb-5">
+    <div class="row py-3">
+        <div class="col-12 text-center">
+            <h1 class="display-3 text-white animated zoomIn">Cases</h1>
+            <a href="{% url 'index' %}" class="h4 text-white">Home</a>
+            <i class="far fa-circle text-white px-2"></i>
+            <a href="{% url 'cases' %}" class="h4 text-white">Cases</a>
+        </div>
+    </div>
+</div>
+<!-- Hero End -->
+
+<!-- Cases Start -->
+<div class="container-fluid py-5" style="background-color: #08291A;">
+    <div class="container wow fadeInUp" data-wow-delay="0.1s">
+        <div class="section-title text-center mb-5">
+            <h5 class="position-relative d-inline-block text-primary text-uppercase">Our Cases</h5>
+            <h1 class="display-5 text-white mb-0">Successful Dental Treatments</h1>
+        </div>
+        <div class="row g-5">
+            {% for case in cases %}
+            <div class="col-lg-4 col-md-6 case-item wow fadeInUp" data-wow-delay="{{ forloop.counter|add:'0.3' }}s">
+                <div class="position-relative rounded overflow-hidden neon-card">
+                    <img class="img-fluid rounded-top case-img" src="{{ case.image.url }}" alt="{{ case.title }}" loading="lazy">
+                    <div class="position-relative text-center p-4 case-text-overlay">
+                        <h5 class="m-0">{{ case.title }}</h5>
+                        <p class="mt-2">{{ case.description|truncatewords:20 }}</p>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <p class="text-center text-white">No cases available at the moment.</p>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+<!-- Cases End -->
+
+<style>
+/* Neon hover effect */
+.neon-card {
+    background-color: #0B3D24;
+    border: 1px solid #D4A537;
+    box-shadow: 0 10px 28px rgba(11, 61, 36, 0.18);
+    transition: all 0.3s ease-in-out;
+}
+.neon-card:hover {
+    box-shadow: 0 10px 28px rgba(11, 61, 36, 0.18);
+    transform: scale(1.05);
+}
+.neon-card img {
+    transition: transform 0.3s ease-in-out;
+}
+.neon-card:hover img {
+    transform: scale(1.1);
+}
+
+/* Text overlay for better readability */
+.case-text-overlay {
+    position: relative;
+    background-color: rgba(0,0,0,0.6); /* dark overlay */
+    border-radius: 0 0 8px 8px;
+}
+.case-text-overlay h5, .case-text-overlay p {
+    color: #fff; /* bright white text */
+    transition: all 0.3s ease-in-out;
+}
+.neon-card:hover .case-text-overlay h5, .neon-card:hover .case-text-overlay p {
+    
+}
+</style>
+
+<!-- WOW.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
+<script>
+new WOW().init();
+</script>
+
+{% endblock %}

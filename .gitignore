@@ -1,0 +1,22 @@
+# Python virtual environments
+.venv/
+env/
+venv/
+ENV/
+__pycache__/
+*.py[cod]
+*.class
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+!.env.example
+
+# Vercel deployment artifacts
+.vercel/
+
+# OS / Editor files
+.DS_Store
+Thumbs.db
+*.log

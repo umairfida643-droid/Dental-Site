@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<!-- Hero Start -->
+<div class="container-fluid bg-primary py-5 hero-header mb-5">
+    <div class="row py-3">
+        <div class="col-12 text-center">
+            <h1 class="display-3 text-white animated zoomIn">Testimonial</h1>
+            <a href="{% url 'index' %}" class="h4 text-white">Home</a>
+            <i class="far fa-circle text-white px-2"></i>
+            <a href="{% url 'testimonial' %}" class="h4 text-white">Testimonial</a>
+        </div>
+    </div>
+</div>
+<!-- Hero End -->
+
+<!-- Testimonial Start -->
+<div class="container-fluid bg-primary bg-testimonial py-5 mb-5 wow fadeInUp" data-wow-delay="0.1s" style="margin-top: 90px;">
+    <div class="container py-5">
+
+        <!-- Form for submitting review -->
+        <div class="row justify-content-center mb-5">
+            <div class="col-lg-7">
+                <form method="POST" enctype="multipart/form-data" class="bg-light p-4 rounded shadow">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button class="btn btn-neon w-100 py-2 mt-3" type="submit">Submit Review</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Display reviews dynamically -->
+        <div class="row justify-content-center">
+            <div class="col-lg-7">
+                <div class="owl-carousel testimonial-carousel rounded p-5 wow zoomIn" data-wow-delay="0.6s">
+                    {% for testimonial in testimonials %}
+                    <div class="testimonial-item text-center text-white neon-card p-4 rounded">
+                        {% if testimonial.image %}
+                        <img class="img-fluid mx-auto rounded-circle mb-4 neon-img" src="{{ testimonial.image.url }}" alt="{{ testimonial.name }}" width="100" height="100">
+                        {% endif %}
+                        <p class="fs-5 neon-text">{{ testimonial.review }}</p>
+                        <hr class="mx-auto w-25 neon-hr">
+                        <h4 class="text-white neon-text mb-0">{{ testimonial.name }}</h4>
+                    </div>
+                    {% empty %}
+                    <p class="text-white text-center">No testimonials yet.</p>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Testimonial End -->
+
+<!-- Neon Styles -->
+<style>
+/* Neon Text */
+.neon-text {
+    color: #D4A537;
+    
+    font-weight: 600;
+    transition: all 0.3s ease-in-out;
+}
+.neon-text:hover {
+    
+}
+
+/* Neon Card */
+.neon-card {
+    background-color: rgba(0,0,0,0.2);
+    border: 1px solid #D4A537;
+    box-shadow: 0 10px 28px rgba(11, 61, 36, 0.18);
+    transition: all 0.3s ease-in-out;
+}
+.neon-card:hover {
+    box-shadow: 0 10px 28px rgba(11, 61, 36, 0.18);
+    transform: translateY(-5px);
+}
+
+/* Neon Button */
+.btn-neon {
+    color: #D4A537;
+    border: 1px solid #D4A537;
+    background: transparent;
+    transition: all 0.3s ease-in-out;
+}
+.btn-neon:hover {
+    color: #0B3D24;
+    background: #D4A537;
+    box-shadow: 0 10px 28px rgba(11, 61, 36, 0.18);
+}
+
+/* Neon Image Hover */
+.neon-img {
+    transition: all 0.3s ease-in-out;
+}
+.neon-img:hover {
+    box-shadow: 0 10px 28px rgba(11, 61, 36, 0.18);
+    transform: scale(1.1);
+}
+
+/* Neon Horizontal Line */
+.neon-hr {
+    border-color: #D4A537;
+    box-shadow: 0 10px 28px rgba(11, 61, 36, 0.18);
+}
+</style>
+
+{% endblock %}

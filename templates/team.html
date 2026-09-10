@@ -1,0 +1,175 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Meet Our Dentists - Dental Bites{% endblock %}
+{% block meta_description %}Meet the certified dentists at Dental Bites — general, cosmetic, orthodontic and implant specialists dedicated to your care.{% endblock %}
+
+{% block content %}
+
+<!-- Hero Start -->
+<div class="container-fluid bg-primary py-5 hero-header mb-5">
+    <div class="row py-3">
+        <div class="col-12 text-center">
+            <h1 class="display-3 text-white animated zoomIn">Our Dentists</h1>
+            <a href="{% url 'index' %}" class="h4 text-white">Home</a>
+            <i class="far fa-circle text-white px-2"></i>
+            <a href="{% url 'team' %}" class="h4 text-white">Dentist</a>
+        </div>
+    </div>
+</div>
+<!-- Hero End -->
+
+<!-- Team Start -->
+<div class="container-fluid py-5">
+    <div class="container">
+        <div class="text-center mx-auto reveal-up mb-5" style="max-width: 700px;">
+            <h5 class="text-primary text-uppercase">Our Dentist</h5>
+            <h1 class="display-6 mb-3">Meet Our Certified & Experienced Dentists</h1>
+            <p class="text-muted mb-0">
+                Every dentist on our team is licensed, continually trained on modern techniques,
+                and focused on making your visit comfortable from start to finish.
+            </p>
+        </div>
+
+        <div class="row g-4">
+            {% for dentist in dentists %}
+            <div class="col-lg-3 col-md-6 reveal-up" style="transition-delay: {{ forloop.counter0 }}00ms;">
+                <div class="dentist-card h-100">
+                    <div class="dentist-photo-wrap">
+                        <img class="dentist-photo" src="{{ dentist.image.url }}" alt="{{ dentist.name }}" loading="lazy">
+                        {% if dentist.experience_years %}
+                        <span class="experience-badge">{{ dentist.experience_years }}+ yrs</span>
+                        {% endif %}
+                    </div>
+                    <div class="dentist-body text-center p-4">
+                        <h5 class="mb-1">{{ dentist.name }}</h5>
+                        <p class="dentist-spec mb-2">{{ dentist.specialization }}</p>
+                        <div class="dentist-stars mb-2" aria-hidden="true">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                        {% if dentist.bio %}
+                        <p class="dentist-bio">{{ dentist.bio }}</p>
+                        {% endif %}
+
+                        <!-- Social Links -->
+                        {% if dentist.twitter or dentist.facebook or dentist.linkedin or dentist.instagram %}
+                        <div class="d-flex justify-content-center gap-2 mt-3">
+                            {% if dentist.twitter %}
+                                <a class="dentist-social" href="{{ dentist.twitter }}" target="_blank" rel="noopener noreferrer" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                            {% endif %}
+                            {% if dentist.facebook %}
+                                <a class="dentist-social" href="{{ dentist.facebook }}" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                            {% endif %}
+                            {% if dentist.linkedin %}
+                                <a class="dentist-social" href="{{ dentist.linkedin }}" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                            {% endif %}
+                            {% if dentist.instagram %}
+                                <a class="dentist-social" href="{{ dentist.instagram }}" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                            {% endif %}
+                        </div>
+                        {% endif %}
+
+                        <a href="{% url 'appointment' %}" class="btn btn-book-dentist w-100 mt-4">Book Appointment</a>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <div class="col-12 text-center text-muted">
+                Dentist profiles are coming soon. Please check back shortly.
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+<!-- Team End -->
+
+<!-- Professional Dentist Card Styling -->
+<style>
+.dentist-card {
+    background: #fff;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(11, 61, 36, 0.08);
+    border: 1px solid rgba(11, 61, 36, 0.06);
+    transition: transform 0.35s ease, box-shadow 0.35s ease;
+    display: flex;
+    flex-direction: column;
+}
+.dentist-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(11, 61, 36, 0.16);
+}
+.dentist-photo-wrap {
+    position: relative;
+    aspect-ratio: 4 / 5;
+    overflow: hidden;
+    background: #F2FBF5;
+}
+.dentist-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+.dentist-card:hover .dentist-photo {
+    transform: scale(1.06);
+}
+.experience-badge {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    background: #D4A537;
+    color: #0B3D24;
+    font-weight: 700;
+    font-size: 12.5px;
+    padding: 5px 12px;
+    border-radius: 30px;
+    box-shadow: 0 6px 14px rgba(212, 165, 55, 0.4);
+}
+.dentist-spec {
+    color: #128C4A;
+    font-weight: 600;
+    font-size: 14px;
+}
+.dentist-stars {
+    color: #D4A537;
+    font-size: 13px;
+}
+.dentist-bio {
+    color: #6c757d;
+    font-size: 13.5px;
+    line-height: 1.6;
+    min-height: 62px;
+}
+.dentist-social {
+    width: 34px;
+    height: 34px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #F2FBF5;
+    color: #0B3D24;
+    transition: all 0.25s ease;
+}
+.dentist-social:hover {
+    background: #128C4A;
+    color: #fff;
+    transform: translateY(-3px);
+}
+.btn-book-dentist {
+    background: #0B3D24;
+    color: #fff;
+    font-weight: 600;
+    border-radius: 8px;
+    padding: 10px;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+.btn-book-dentist:hover {
+    background: #128C4A;
+    color: #fff;
+}
+</style>
+
+{% endblock %}
