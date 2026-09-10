@@ -40,7 +40,7 @@ export default function Footer({ onOpenBooking }) {
             <ul className="space-y-2.5 text-xs">
               <li><a href="#services" className="hover:text-cyan-400 transition">Our Treatments</a></li>
               <li><a href="#before-after" className="hover:text-cyan-400 transition">Before & After Showcase</a></li>
-              <li><a href="#dentists" className="hover:text-cyan-400 transition">Meet The Specialists</a></li>
+              <li><a href="#dentists" className="hover:text-cyan-400 transition">Chief Consultant Profile</a></li>
               <li><a href="#why-us" className="hover:text-cyan-400 transition">Why Choose dentbites</a></li>
               <li><a href="#testimonials" className="hover:text-cyan-400 transition">Patient Reviews</a></li>
               <li><a href="#faq" className="hover:text-cyan-400 transition">FAQs</a></li>

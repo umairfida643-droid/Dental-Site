@@ -153,7 +153,7 @@ export default function BeforeAfterSlider({ onOpenBooking }) {
                 </div>
                 <div className="flex items-center justify-between">
                   <span className="text-slate-400">Lead Specialist:</span>
-                  <span className="font-semibold text-white">Dr. Noor Fatima (MDS)</span>
+                  <span className="font-semibold text-white">Dr. Muhammad Hafeez (FCPS, FICOI)</span>
                 </div>
               </div>
             </div>

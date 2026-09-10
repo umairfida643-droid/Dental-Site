@@ -83,7 +83,7 @@ export default function WhyChooseUs({ onOpenBooking }) {
               Ready to experience painless dental excellence?
             </h4>
             <p className="text-xs sm:text-sm text-slate-300">
-              Speak with our lead dentists today or book your preferred slot online in under 60 seconds.
+              Speak with Dr. Muhammad Hafeez today or book your preferred slot online in under 60 seconds.
             </p>
           </div>
           <button

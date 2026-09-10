@@ -18,7 +18,7 @@ export default function Navbar({ onOpenBooking }) {
   const navLinks = [
     { name: 'Services', href: '#services' },
     { name: 'Before & After', href: '#before-after' },
-    { name: 'Specialists', href: '#dentists' },
+    { name: 'Chief Consultant', href: '#dentists' },
     { name: 'Why dentbites', href: '#why-us' },
     { name: 'Testimonials', href: '#testimonials' },
     { name: 'FAQ', href: '#faq' }

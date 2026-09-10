@@ -111,31 +111,23 @@ export const DENTISTS = [
     degrees: "BDS, FCPS (Orthodontics), FICOI (USA)",
     experience: "15+ Years Experience",
     image: "/assets/media/dentists/hafeez.jpg",
-    specialty: "Dental Implants, Orthodontics & Clear Aligners",
-    bio: "Pioneer in computer-guided 3D implant placement and advanced orthodontics. Over 8,000 successful smile restoration cases treated.",
-    availability: "Mon - Sat (04:00 PM - 09:00 PM)"
-  },
-  {
-    id: "dr-noor",
-    name: "Dr. Noor Fatima",
-    title: "Head of Aesthetic & Restorative Dentistry",
-    degrees: "BDS, MDS (Aesthetic Dentistry, UK)",
-    experience: "11+ Years Experience",
-    image: "/assets/media/dentists/noor.jpg",
-    specialty: "Porcelain Veneers, Smile Design & Rotary RCT",
-    bio: "Renowned for delicate aesthetic precision, micro-thin veneer crafting, and painless single-visit root canal treatments.",
-    availability: "Mon - Sat (10:00 AM - 04:00 PM)"
-  },
-  {
-    id: "dr-bilal",
-    name: "Dr. Ahmed Bilal",
-    title: "Pediatric & Preventive Specialist",
-    degrees: "BDS, MCPS (Pedodontics)",
-    experience: "8+ Years Experience",
-    image: "/assets/media/dentists/doctor.jpg",
-    specialty: "Child Dental Care, Trauma Management & Extractions",
-    bio: "Dedicated to transforming children's dental visits into joyful, fear-free experiences using modern gentle sedation techniques.",
-    availability: "Mon - Fri (11:00 AM - 06:00 PM)"
+    specialty: "Dental Implants, Orthodontics, Clear Aligners & Cosmetic Smile Design",
+    bio: "Pioneer in computer-guided 3D implant placement and advanced orthodontics. With over 15 years of clinical mastery and more than 8,000 successful smile restoration cases, Dr. Muhammad Hafeez provides compassionate, painless, world-class dental solutions utilizing state-of-the-art digital dental engineering.",
+    availability: "Monday - Saturday: 09:00 AM - 09:00 PM",
+    achievements: [
+      "Fellow of the International Congress of Oral Implantologists (FICOI, USA)",
+      "FCPS Specialized in Orthodontics & Dentofacial Orthopedics",
+      "Over 8,000+ Successfully Restored Smiles & Implants",
+      "Certified in Computer-Guided 3D Surgical Diagnostics"
+    ],
+    expertise: [
+      "Immediate & Full-Arch Dental Implants",
+      "Clear Aligners & Advanced Orthodontics",
+      "Painless Single-Sitting Root Canal Therapy",
+      "Porcelain Veneers & Complete Smile Makeovers",
+      "Ultrasonic Periodontal Scaling & Polishing",
+      "Full Mouth Functional Oral Rehabilitation"
+    ]
   }
 ];
 
@@ -146,7 +138,7 @@ export const TESTIMONIALS = [
     role: "Verified Patient",
     treatment: "Root Canal Treatment",
     rating: 5,
-    text: "I was terrified of getting a root canal, but Dr. Noor made it completely painless in just one sitting! The clinic is spotless, ultra-modern, and the 3D explanation before the procedure gave me full peace of mind.",
+    text: "I was terrified of getting a root canal, but Dr. Muhammad Hafeez made it completely painless in just one sitting! The clinic is spotless, ultra-modern, and the 3D explanation before the procedure gave me full peace of mind.",
     image: "/assets/media/testimonials/FASEEH.jpeg"
   },
   {
@@ -164,7 +156,7 @@ export const TESTIMONIALS = [
     role: "Verified Patient",
     treatment: "Porcelain Veneers Smile Makeover",
     rating: 5,
-    text: "The smile makeover completely boosted my career confidence! Dr. Hafeez and team designed a smile that looks completely natural, bright, and perfectly balanced. 10/10!",
+    text: "The smile makeover completely boosted my career confidence! Dr. Muhammad Hafeez designed a smile that looks completely natural, bright, and perfectly balanced. 10/10!",
     image: "/assets/media/testimonials/slide3.jpg"
   },
   {
@@ -174,7 +166,7 @@ export const TESTIMONIALS = [
     treatment: "Double Dental Implants",
     rating: 5,
     text: "Got two titanium implants installed with 3D surgical guidance. Healing was surprisingly fast with zero complications. The chewing comfort is exactly like my original teeth.",
-    image: "/assets/media/testimonials/hafeez.jpg"
+    image: "/assets/img/testimonial-2.jpg"
   }
 ];
 

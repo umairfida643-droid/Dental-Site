@@ -136,7 +136,7 @@ export default function Hero({ onOpenBooking }) {
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-[1.12] mb-6">
               Transform Your Smile With{' '}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-sky-300 to-teal-300 drop-shadow-sm">
-                Leading Dental Specialists.
+                Lahore's Leading Dental Specialist.
               </span>
             </h1>
 
@@ -188,11 +188,11 @@ export default function Hero({ onOpenBooking }) {
 
             {/* Social Proof Bar */}
             <div className="pt-6 border-t border-slate-800/80 flex flex-wrap items-center gap-5">
-              {/* Doctor Headshots Stack */}
+              {/* Satisfied Patient Avatars Stack */}
               <div className="flex -space-x-2.5 overflow-hidden">
-                <img className="inline-block h-10 w-10 rounded-full ring-2 ring-cyan-500 object-cover" src="/assets/media/dentists/hafeez.jpg" alt="Dr. Hafeez" />
-                <img className="inline-block h-10 w-10 rounded-full ring-2 ring-cyan-500 object-cover" src="/assets/media/dentists/noor.jpg" alt="Dr. Noor" />
-                <img className="inline-block h-10 w-10 rounded-full ring-2 ring-cyan-500 object-cover" src="/assets/media/dentists/doctor.jpg" alt="Dr. Bilal" />
+                <img className="inline-block h-10 w-10 rounded-full ring-2 ring-cyan-500 object-cover" src="/assets/media/testimonials/FASEEH.jpeg" alt="Satisfied Patient" />
+                <img className="inline-block h-10 w-10 rounded-full ring-2 ring-cyan-500 object-cover" src="/assets/media/testimonials/sami.jpg" alt="Satisfied Patient" />
+                <img className="inline-block h-10 w-10 rounded-full ring-2 ring-cyan-500 object-cover" src="/assets/img/testimonial-1.jpg" alt="Satisfied Patient" />
                 <div className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-cyan-900 ring-2 ring-cyan-500 text-xs font-bold text-cyan-200">
                   +15k
                 </div>
@@ -302,7 +302,7 @@ export default function Hero({ onOpenBooking }) {
                 />
                 <div>
                   <div className="text-xs font-bold text-white">Dr. Muhammad Hafeez</div>
-                  <div className="text-[10px] text-cyan-300 font-medium">Chief Consultant Orthodontist</div>
+                  <div className="text-[10px] text-cyan-300 font-medium">Chief Consultant & Implantologist</div>
                 </div>
               </div>
 
