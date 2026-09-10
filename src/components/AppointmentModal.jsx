@@ -171,7 +171,7 @@ export default function AppointmentModal({ isOpen, onClose, initialServiceId, in
               <div className="flex flex-col sm:flex-row gap-3 justify-center">
                 <button
                   onClick={() => {
-                    const waText = encodeURIComponent(`Hello DentCare, confirming my booking ref: ${bookingRef} for ${selectedDate}`);
+                    const waText = encodeURIComponent(`Hello dentbites, confirming my booking ref: ${bookingRef} for ${selectedDate}`);
                     window.open(`https://wa.me/${CLINIC_INFO.whatsapp}?text=${waText}`, '_blank');
                   }}
                   className="px-6 py-3 rounded-xl bg-[#25D366] hover:bg-[#20bd5a] text-white text-xs sm:text-sm font-semibold flex items-center justify-center gap-2 shadow-lg shadow-[#25D366]/30 transition-all"

@@ -16,19 +16,13 @@ export default function Footer({ onOpenBooking }) {
           
           {/* Brand Col */}
           <div className="lg:col-span-2 space-y-4">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-cyan-400 to-sky-600 p-0.5 shadow-lg shadow-cyan-500/30">
-                <div className="w-full h-full bg-[#081726] rounded-[10px] flex items-center justify-center p-1.5">
-                  <img src="/assets/img/Logo.png" alt="DentCare Logo" className="w-full h-full object-contain filter brightness-125" />
-                </div>
-              </div>
-              <div>
-                <div className="text-xl font-bold tracking-tight text-white">
-                  Dent<span className="text-cyan-400">Care</span>
-                </div>
-                <p className="text-[10px] text-slate-400 uppercase font-medium">Advanced 3D Dentistry</p>
-              </div>
-            </div>
+            <a href="#" className="inline-block group mb-1">
+              <img 
+                src="/assets/img/Logo.png" 
+                alt="dentbites" 
+                className="h-16 sm:h-20 w-auto object-contain filter drop-shadow-[0_4px_14px_rgba(87,202,219,0.35)] group-hover:scale-105 transition-transform duration-300" 
+              />
+            </a>
 
             <p className="text-xs text-slate-300 leading-relaxed max-w-sm">
               Dedicated to pain-free, world-class dental care with computer-guided 3D diagnostics, certified implant specialists, and Class-B European sterilization protocols.
@@ -47,7 +41,7 @@ export default function Footer({ onOpenBooking }) {
               <li><a href="#services" className="hover:text-cyan-400 transition">Our Treatments</a></li>
               <li><a href="#before-after" className="hover:text-cyan-400 transition">Before & After Showcase</a></li>
               <li><a href="#dentists" className="hover:text-cyan-400 transition">Meet The Specialists</a></li>
-              <li><a href="#why-us" className="hover:text-cyan-400 transition">Why Choose DentCare</a></li>
+              <li><a href="#why-us" className="hover:text-cyan-400 transition">Why Choose dentbites</a></li>
               <li><a href="#testimonials" className="hover:text-cyan-400 transition">Patient Reviews</a></li>
               <li><a href="#faq" className="hover:text-cyan-400 transition">FAQs</a></li>
             </ul>
@@ -96,7 +90,7 @@ export default function Footer({ onOpenBooking }) {
         {/* Sub-footer */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400">
           <div>
-            © {new Date().getFullYear()} DentCare Luxury Clinic. All rights reserved.
+            © {new Date().getFullYear()} dentbites Dental Clinic. All rights reserved.
           </div>
           <div className="flex items-center gap-4">
             <button

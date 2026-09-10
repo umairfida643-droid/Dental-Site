@@ -1,10 +1,10 @@
 export const CLINIC_INFO = {
-  name: "DentCare Premium",
+  name: "dentbites",
   tagline: "Advanced 3D Dentistry & Smile Restoration Center",
   phone: "+92 300 1234567",
   whatsapp: "+923001234567",
   whatsappDisplay: "+92 300 1234567",
-  email: "care@dentcareclinic.com",
+  email: "care@dentbites.com",
   address: "Suite 402, Medical Boulevard, Near City Center, Lahore, Pakistan",
   timing: "Monday - Saturday: 09:00 AM - 09:00 PM | Sunday: Emergency Only",
   emergencyPhone: "+92 300 1234567",

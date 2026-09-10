@@ -43,12 +43,12 @@ export default function WhyChooseUs({ onOpenBooking }) {
         <div className="text-center max-w-3xl mx-auto mb-16">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyan-950/60 border border-cyan-500/30 text-xs font-semibold text-cyan-300 mb-4">
             <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
-            <span>The DentCare Gold Standard</span>
+            <span>The dentbites Gold Standard</span>
           </div>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight mb-4">
             Why Discerning Patients Choose <br className="hidden sm:inline" />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-sky-300 to-teal-300">
-              DentCare For Their Dental Health
+              dentbites For Their Dental Health
             </span>
           </h2>
           <p className="text-slate-300 text-sm sm:text-base">

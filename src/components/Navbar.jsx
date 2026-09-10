@@ -19,7 +19,7 @@ export default function Navbar({ onOpenBooking }) {
     { name: 'Services', href: '#services' },
     { name: 'Before & After', href: '#before-after' },
     { name: 'Specialists', href: '#dentists' },
-    { name: 'Why DentCare', href: '#why-us' },
+    { name: 'Why dentbites', href: '#why-us' },
     { name: 'Testimonials', href: '#testimonials' },
     { name: 'FAQ', href: '#faq' }
   ];
@@ -59,27 +59,12 @@ export default function Navbar({ onOpenBooking }) {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between">
             {/* Logo */}
-            <a href="#" className="flex items-center gap-3 group">
-              <div className="relative w-10 h-10 rounded-xl bg-gradient-to-br from-cyan-400 to-sky-600 p-0.5 shadow-lg shadow-cyan-500/30 group-hover:scale-105 transition-transform">
-                <div className="w-full h-full bg-[#081726] rounded-[10px] flex items-center justify-center overflow-hidden p-1.5">
-                  <img 
-                    src="/assets/img/Logo.png" 
-                    alt="DentCare Logo" 
-                    className="w-full h-full object-contain filter brightness-125"
-                    onError={(e) => {
-                      e.target.style.display = 'none';
-                      e.target.parentElement.innerHTML = '🦷';
-                    }}
-                  />
-                </div>
-              </div>
-              <div>
-                <div className="text-xl font-bold tracking-tight text-white flex items-center gap-1.5">
-                  Dent<span className="text-cyan-400">Care</span>
-                  <span className="text-[10px] uppercase font-semibold px-1.5 py-0.5 rounded bg-cyan-950 text-cyan-300 border border-cyan-800/60 ml-1">3D Clinic</span>
-                </div>
-                <p className="text-[10px] text-slate-400 -mt-0.5 tracking-wider uppercase font-medium">Advanced Dentistry</p>
-              </div>
+            <a href="#" className="flex items-center group py-0.5">
+              <img 
+                src="/assets/img/Logo.png" 
+                alt="dentbites" 
+                className="h-14 sm:h-16 md:h-20 w-auto object-contain filter drop-shadow-[0_4px_14px_rgba(87,202,219,0.35)] group-hover:scale-105 transition-transform duration-300"
+              />
             </a>
 
             {/* Desktop Navigation Links */}
@@ -98,7 +83,7 @@ export default function Navbar({ onOpenBooking }) {
             {/* Right Action CTAs */}
             <div className="hidden sm:flex items-center gap-3">
               <a
-                href={`https://wa.me/${CLINIC_INFO.whatsapp}?text=Hello%20DentCare,%20I%20would%20like%20to%20inquire%20about%20a%20dental%20appointment.`}
+                href={`https://wa.me/${CLINIC_INFO.whatsapp}?text=Hello%20dentbites,%20I%20would%20like%20to%20inquire%20about%20a%20dental%20appointment.`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hidden md:flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-semibold text-[#25D366] bg-[#25D366]/10 border border-[#25D366]/30 hover:bg-[#25D366]/20 transition-all shadow-sm"

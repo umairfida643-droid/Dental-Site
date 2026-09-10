@@ -31,7 +31,7 @@ export default function BookingSection() {
     const selectedServiceObj = SERVICES.find(s => s.id === service);
     const selectedDentistObj = DENTISTS.find(d => d.id === dentist);
     const msg = encodeURIComponent(
-      `Hello DentCare! I would like to book an appointment:\n` +
+      `Hello dentbites! I would like to book an appointment:\n` +
       `Name: ${name}\n` +
       `Phone: ${phone}\n` +
       `Treatment: ${selectedServiceObj?.title || service}\n` +

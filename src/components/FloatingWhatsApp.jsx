@@ -12,10 +12,10 @@ export default function FloatingWhatsApp() {
 
       {/* Floating Official WhatsApp Button */}
       <a
-        href={`https://wa.me/${CLINIC_INFO.whatsapp}?text=Hello%20DentCare!%20I%20would%20like%20to%20inquire%20about%20dental%20treatments%20and%20booking.`}
+        href={`https://wa.me/${CLINIC_INFO.whatsapp}?text=Hello%20dentbites!%20I%20would%20like%20to%20inquire%20about%20dental%20treatments%20and%20booking.`}
         target="_blank"
         rel="noopener noreferrer"
-        aria-label="Chat with DentCare on WhatsApp"
+        aria-label="Chat with dentbites on WhatsApp"
         className="relative w-14 h-14 rounded-full bg-[#25D366] hover:bg-[#20bd5a] text-white flex items-center justify-center shadow-2xl shadow-[#25D366]/50 hover:scale-110 active:scale-95 transition-all duration-300"
       >
         {/* Pulsing subtle ring */}
