@@ -35,27 +35,17 @@ SECRET_KEY = os.environ.get(
 
 DEBUG = os.environ.get('DJANGO_DEBUG', 'True').lower() == 'true'
 
-ALLOWED_HOSTS = [
-    host.strip()
-    for host in os.environ.get(
-        'DJANGO_ALLOWED_HOSTS',
-        '127.0.0.1,localhost,.vercel.app,dentalsite-jade.vercel.app',
-    ).split(',')
-    if host.strip()
-]
-
-# Ensure .vercel.app is always allowed for Vercel preview & production domains
-if '.vercel.app' not in ALLOWED_HOSTS:
-    ALLOWED_HOSTS.append('.vercel.app')
+ALLOWED_HOSTS = ['*']
 
 CSRF_TRUSTED_ORIGINS = [
     origin.strip()
     for origin in os.environ.get(
         'DJANGO_CSRF_TRUSTED_ORIGINS',
-        'https://*.vercel.app,https://dentalsite-jade.vercel.app',
+        'https://*.vercel.app,https://dentalsite-jade.vercel.app,http://127.0.0.1,http://localhost',
     ).split(',')
     if origin.strip()
 ]
+
 
 
 # Application definition
@@ -105,13 +95,43 @@ WSGI_APPLICATION = 'dental_clinic.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
+import shutil
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+DATABASE_URL = os.environ.get('DATABASE_URL')
+if DATABASE_URL:
+    import urllib.parse
+    url = urllib.parse.urlparse(DATABASE_URL)
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': url.path.lstrip('/'),
+            'USER': url.username,
+            'PASSWORD': url.password,
+            'HOST': url.hostname,
+            'PORT': url.port or 5432,
+        }
     }
-}
+else:
+    db_source = BASE_DIR / 'db.sqlite3'
+    # On serverless (Vercel/Lambda), copy db to /tmp if needed so it is readable and writable
+    if os.environ.get('VERCEL') or os.environ.get('AWS_LAMBDA_FUNCTION_NAME') or not os.access(BASE_DIR, os.W_OK):
+        tmp_db = Path('/tmp/db.sqlite3')
+        if db_source.exists() and not tmp_db.exists():
+            try:
+                shutil.copyfile(db_source, tmp_db)
+            except Exception:
+                pass
+        db_target = tmp_db if tmp_db.exists() else db_source
+    else:
+        db_target = db_source
+
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': db_target,
+        }
+    }
+
 
 
 # Password validation
@@ -228,4 +248,12 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 SECURE_BROWSER_XSS_FILTER = True
 SESSION_COOKIE_HTTPONLY = True
 CSRF_COOKIE_HTTPONLY = False
+
+# Stateless signed cookie session engine - no database writes needed for sessions
+SESSION_ENGINE = 'django.contrib.sessions.backends.signed_cookies'
+
+# WhiteNoise resilience
+WHITENOISE_MANIFEST_STRICT = False
+WHITENOISE_USE_FINDERS = True
+
 
